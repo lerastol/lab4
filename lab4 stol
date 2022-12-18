@@ -1,0 +1,55 @@
+import tkinter as tk
+from tkinter import Label
+
+import random as rn
+import time
+
+
+def key():
+    bukvi = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    a = rn.randint(0, 25)
+    b = rn.randint(0, 25)
+    work_letters = bukvi[min(a, b):max(a, b)]
+    if min(a, b) == max(a, b):
+        seq = ''
+        seq = bukvi[a] * 7
+    else:
+        seq = ''
+        for i in range(7):
+            seq += work_letters[rn.randint(0, len(work_letters) - 1)]
+    temp_key = str(min(a, b)) + ' ' + seq + ' ' + str(max(a, b))
+    return temp_key
+
+def animation():
+    for i in range(10):
+        window.update_idletasks()
+
+        frame = tk.Frame(window)
+        frame.place(relx=0.5, rely=0.5, anchor='center')
+
+        label_bg: Label = tk.Label(frame, image=bg)
+        label_bg.grid()
+
+        label_animation = tk.Label(frame, text=key(), font=("Arial", 30), bg='#999900')
+        label_animation.grid(column=0, row=0, padx=10, pady=20)
+
+
+        time.sleep(0.5)
+
+
+def knop1():
+    print('Кнопка нажата')
+window = tk.Tk()
+window.title('Lab4.pAmAgItE')
+window.geometry('900x507')
+bg = tk.PhotoImage(file='AngryBirds.png')
+
+frame = tk.Frame(window)
+frame.place(relx=0.5, rely=0.5, anchor='center')
+
+label_bg = tk.Label(frame, image=bg)
+label_bg.grid()
+
+button_keys = tk.Button(frame, text = 'Сгенерировать ключ', font=('Arial',15), command=animation)
+button_keys.grid(column=0, row=0, padx=10, pady=20)
+window.mainloop()
